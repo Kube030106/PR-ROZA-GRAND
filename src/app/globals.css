@@ -1,26 +1,150 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* 6 Named Brand & Coastal Architectural Colors */
+    --french-yellow: #D99824;        /* French-colonial warm mustard */
+    --french-yellow-light: #FBF1DC;
+    --french-teal: #1B7982;          /* Pondicherry heritage teal shutter / sea */
+    --french-teal-dark: #114F55;
+    --french-teal-soft: #E9F4F5;
+    --roza-purple: #46144A;          /* Royal purple from PR Roza Grand sign */
+    --roza-purple-light: #6E2675;
+    --roza-purple-soft: #F6ECF7;
+    --roza-gold: #C2952B;            /* Golden lotus emblem */
+    --roza-gold-light: #FBF4DE;
+    --coastal-cream: #FAF7F2;        /* Sun-bleached limestone background */
+    --coastal-sand: #EEE7DA;
+    --charcoal-slate: #1C242C;       /* Deep slate for high-contrast AAA text */
+    --charcoal-muted: #4F5F6E;       /* Accessible secondary text */
+    
+    /* Semantic tokens */
+    --bg-base: #FAF7F2;
+    --bg-surface: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --border-subtle: #E8E1D4;
+    --border-medium: #D3C9B8;
+    --text-primary: #1C242C;
+    --text-secondary: #4F5F6E;
+    --accent-primary: #1B7982;
+    --accent-hover: #114F55;
+    --brand-royal: #46144A;
+  }
+
+  [data-theme="dark"],
+  .dark {
+    --french-yellow: #EEB852;
+    --french-yellow-light: #38270F;
+    --french-teal: #3BB4BE;
+    --french-teal-dark: #1B6F77;
+    --french-teal-soft: #132A2D;
+    --roza-purple: #B258BC;
+    --roza-purple-light: #D283DA;
+    --roza-purple-soft: #2F1432;
+    --roza-gold: #E5BD5D;
+    --roza-gold-light: #34280E;
+    --coastal-cream: #0E1317;
+    --coastal-sand: #171F25;
+    --charcoal-slate: #F4F7F9;
+    --charcoal-muted: #97A7B6;
+
+    /* Semantic tokens */
+    --bg-base: #0E1317;
+    --bg-surface: #161D22;
+    --bg-card: #1C252C;
+    --border-subtle: #26333D;
+    --border-medium: #3A4C5A;
+    --text-primary: #F4F7F9;
+    --text-secondary: #97A7B6;
+    --accent-primary: #3BB4BE;
+    --accent-hover: #58C9D3;
+    --brand-royal: #B258BC;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Typography helpers */
+.font-heading {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+}
+
+/* Characterful arched room frame inspired by French colonial arched verandas */
+.coastal-arch {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}
+
+.coastal-pill {
+  border-radius: 9999px;
+}
+
+/* Orchestrated Hero Entrance Motion */
+@keyframes heroEntranceFade {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-entrance {
+  animation: heroEntranceFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-bar {
+  animation: heroEntranceFade 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  opacity: 0;
+}
+
+/* Subtle, dignified hover transitions */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus styles for keyboard accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
