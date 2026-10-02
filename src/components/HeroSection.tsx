@@ -12,9 +12,9 @@ export function HeroSection() {
   return (
     <section
       aria-label="Welcome to PR Roza Grand Guest House"
-      className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-[var(--ocean-deep)]"
+      className="relative h-[100svh] min-h-[100svh] md:h-auto md:min-h-screen flex flex-col justify-between md:justify-end overflow-hidden bg-[#083D46]"
     >
-      {/* ── Full-bleed Background Image & Layered Cinematic Overlay ── */}
+      {/* ── Background Image ── */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/auroville-beach.jpg"
@@ -23,19 +23,78 @@ export function HeroSection() {
           priority
           quality={92}
           sizes="100vw"
-          className="object-cover object-center animate-hero-image"
+          className="object-cover object-center animate-hero-image md:object-center"
         />
         
-        {/* Cinematic Left-to-Right Gradient Overlay: strong behind text (left), transparent on right for sunset */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#040D10]/95 via-[#040D10]/75 via-50% sm:via-45% lg:via-40% to-transparent pointer-events-none" />
+        {/* Mobile Cinematic Gradient Overlay (< 768px) */}
+        <div 
+          className="md:hidden absolute inset-0 pointer-events-none" 
+          style={{
+            background: 'linear-gradient(180deg, rgba(5, 25, 30, 0.62) 0%, rgba(5, 25, 30, 0.40) 38%, rgba(5, 25, 30, 0.58) 72%, rgba(5, 25, 30, 0.78) 100%)'
+          }} 
+        />
         
-        {/* Soft vertical vignette: protects header (top) and availability bar (bottom) */}
-        <div className="absolute top-0 inset-x-0 h-36 bg-gradient-to-b from-[#040D10]/70 via-[#040D10]/20 to-transparent pointer-events-none" />
-        <div className="absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-[#040D10]/95 via-[#040D10]/50 to-transparent pointer-events-none" />
+        {/* Desktop Cinematic Gradient Overlays (>= 768px) */}
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#040D10]/95 via-[#040D10]/75 via-50% sm:via-45% lg:via-40% to-transparent pointer-events-none" />
+        <div className="hidden md:block absolute top-0 inset-x-0 h-36 bg-gradient-to-b from-[#040D10]/70 via-[#040D10]/20 to-transparent pointer-events-none" />
+        <div className="hidden md:block absolute bottom-0 inset-x-0 h-52 bg-gradient-to-t from-[#040D10]/95 via-[#040D10]/50 to-transparent pointer-events-none" />
       </div>
 
-      {/* ── Floating Hero Content ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full pb-10 sm:pb-14 pt-32 sm:pt-40">
+      {/* ── MOBILE-ONLY HERO COMPOSITION (< 768px) ── */}
+      <div 
+        className="md:hidden relative z-10 flex flex-col justify-between h-[100svh] min-h-[100svh] px-6 w-full max-w-md mx-auto text-left"
+        style={{
+          paddingTop: 'calc(env(safe-area-inset-top) + 76px)',
+          paddingBottom: 'calc(env(safe-area-inset-bottom) + 20px)'
+        }}
+      >
+        {/* Top: Location Badge */}
+        <div className="pt-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#083D46]/80 backdrop-blur-md border border-white/25 text-white text-[11px] font-semibold tracking-wider uppercase max-w-[280px] truncate shadow-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
+            <MapPin className="w-3.5 h-3.5 text-[#D6A24A] flex-shrink-0" />
+            <span className="truncate">📍 ECR ROAD · AUROVILLE</span>
+          </span>
+        </div>
+
+        {/* Middle: Headline & Description */}
+        <div className="my-auto py-2">
+          <h1 className="font-heading font-light leading-[0.98] tracking-tight max-w-[330px] text-[clamp(40px,10.5vw,54px)] [text-shadow:_0_3px_15px_rgba(0,0,0,0.85)] mb-3.5">
+            <span className="block text-white">Wake up to</span>
+            <span className="block italic text-[#D6A24A]">the sound of the sea.</span>
+          </h1>
+
+          <p className="text-[#F1F3EF] text-[15px] font-normal leading-[1.5] max-w-[320px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            A calm coastal retreat just minutes from Auroville Beach.
+          </p>
+        </div>
+
+        {/* Bottom: Compact Mobile CTAs */}
+        <div className="w-full flex flex-col items-center gap-2.5 pb-1">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="h-[52px] w-full max-w-[295px] rounded-full text-sm font-bold bg-[#D6A24A] text-[#083D46] hover:bg-[#E2B866] active:scale-[0.98] transition-all flex items-center justify-center gap-2.5 shadow-xl"
+            aria-label="Book your stay via WhatsApp"
+          >
+            <svg className="w-4 h-4 flex-shrink-0 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.553 4.113 1.52 5.847L0 24l6.335-1.484C8.05 23.454 10.003 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.843 0-3.603-.497-5.13-1.373l-.368-.214-3.76.881.936-3.637-.238-.385C2.526 15.662 2 13.876 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+            </svg>
+            <span>Book Your Stay</span>
+          </a>
+
+          <Link
+            href="/rooms"
+            className="h-[52px] w-full max-w-[295px] rounded-full text-sm font-semibold text-white bg-white/[0.06] border border-white/55 backdrop-blur-md hover:bg-white/[0.14] active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-lg"
+          >
+            <span>Explore Rooms</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* ── UNTOUCHED DESKTOP HERO CONTENT (>= 768px) ── */}
+      <div className="hidden md:block relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full pb-10 sm:pb-14 pt-32 sm:pt-40">
         <div className="max-w-3xl lg:max-w-4xl">
 
           {/* Location badge */}
@@ -113,15 +172,15 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── Availability Bar ── */}
-      <div className="relative z-20 w-full animate-hero-bar">
+      {/* ── UNTOUCHED DESKTOP Availability Bar (>= 768px) ── */}
+      <div className="hidden md:block relative z-20 w-full animate-hero-bar">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-14">
           <AvailabilityBar />
         </div>
       </div>
 
-      {/* ── Scroll Indicator ── */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-1.5 animate-hero-scroll">
+      {/* ── UNTOUCHED DESKTOP Scroll Indicator (>= 768px) ── */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-1.5 animate-hero-scroll">
         <span className="text-white/40 text-[10px] tracking-widest uppercase font-semibold">Scroll</span>
         <ChevronDown className="w-4 h-4 text-white/40" />
       </div>
