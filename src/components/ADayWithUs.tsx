@@ -10,9 +10,9 @@ export function ADayWithUs() {
   };
   const periodIcons = [Sunrise, Sun, Sunset];
   const periodColors = [
-    { bg: 'bg-amber-50 dark:bg-amber-950/30', icon: 'text-amber-600 dark:text-amber-300', accent: 'border-l-amber-400' },
-    { bg: 'bg-[var(--ocean-soft)] dark:bg-[var(--french-teal-soft)]', icon: 'text-[var(--accent-primary)]', accent: 'border-l-[var(--accent-primary)]' },
-    { bg: 'bg-[var(--sunset-pale)]', icon: 'text-[var(--sunset-warm)]', accent: 'border-l-[var(--sunset-gold)]' },
+    { bg: 'bg-[#EAF3F1] border border-[#B8D8D4]', icon: 'text-[#0B5961]', accent: 'border-l-[#D6A24A]' },
+    { bg: 'bg-[#EAF3F1] border border-[#B8D8D4]', icon: 'text-[#0B5961]', accent: 'border-l-[#0B5961]' },
+    { bg: 'bg-[#EAF3F1] border border-[#B8D8D4]', icon: 'text-[#0B5961]', accent: 'border-l-[#D6A24A]' },
   ];
 
   return (

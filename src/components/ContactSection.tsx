@@ -71,15 +71,15 @@ export function ContactSection() {
                 href={`tel:${GUEST_HOUSE_DATA.contact.phoneRaw}`}
                 className="flex items-center gap-4 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover-lift group"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[var(--ocean-soft)] dark:bg-[var(--french-teal-soft)] text-[var(--accent-primary)] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <Phone className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-[#EAF3F1] border border-[#B8D8D4] text-[#0B5961] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <Phone className="w-5 h-5 text-[#0B5961]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-muted)]">Front Desk</p>
                   <p className="font-heading text-lg font-semibold text-[var(--text-primary)] mt-0.5">{GUEST_HOUSE_DATA.contact.phoneDisplay}</p>
                   <p className="text-[11px] text-[var(--text-muted)]">Available 24 hours</p>
                 </div>
-                <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent-primary)] transition-colors flex-shrink-0" />
+                <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[#0B5961] transition-colors flex-shrink-0" />
               </a>
 
               {/* WhatsApp */}
@@ -89,21 +89,21 @@ export function ContactSection() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover-lift group"
               >
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <MessageCircle className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-[#EAF3F1] border border-[#B8D8D4] text-[#0B5961] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <MessageCircle className="w-5 h-5 text-[#0B5961]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-muted)]">WhatsApp</p>
                   <p className="font-heading text-lg font-semibold text-[var(--text-primary)] mt-0.5">{GUEST_HOUSE_DATA.contact.whatsappDisplay}</p>
                   <p className="text-[11px] text-[var(--text-muted)]">Instant booking confirmation</p>
                 </div>
-                <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-emerald-500 transition-colors flex-shrink-0" />
+                <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[#0B5961] transition-colors flex-shrink-0" />
               </a>
 
               {/* Address */}
               <div className="flex items-start gap-4 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                <div className="w-12 h-12 rounded-2xl bg-[var(--sunset-pale)] text-[var(--sunset-warm)] flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-[#EAF3F1] border border-[#B8D8D4] text-[#0B5961] flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-[#C99A4A]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-muted)]">Address</p>
@@ -112,17 +112,17 @@ export function ContactSection() {
                     href={GUEST_HOUSE_DATA.contact.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-[var(--accent-primary)] font-bold mt-2 hover:text-[var(--accent-gold)] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs text-[#0B5961] font-bold mt-2 hover:text-[#C99A4A] transition-colors"
                   >
-                    <Navigation className="w-3 h-3" /> Get Directions
+                    <Navigation className="w-3 h-3 text-[#C99A4A]" /> Get Directions
                   </a>
                 </div>
               </div>
 
               {/* Email */}
               <div className="flex items-center gap-4 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                <div className="w-12 h-12 rounded-2xl bg-[var(--roza-purple-soft)] text-[var(--roza-purple)] dark:text-[var(--roza-purple-light)] flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-[#EAF3F1] border border-[#B8D8D4] text-[#0B5961] flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-[#0B5961]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-muted)]">Email</p>
@@ -132,8 +132,8 @@ export function ContactSection() {
 
               {/* Hours */}
               <div className="flex items-center gap-4 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-5 h-5" />
+                <div className="w-12 h-12 rounded-2xl bg-[#EAF3F1] border border-[#B8D8D4] text-[#0B5961] flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5 text-[#0B5961]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-muted)]">Check-in / Out</p>
