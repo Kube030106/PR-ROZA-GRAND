@@ -1,22 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { CookieNotice } from "@/components/CookieNotice";
+import { MobileBookingBar } from "@/components/MobileBookingBar";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { GUEST_HOUSE_DATA } from "@/data/guestHouseData";
 
-const fraunces = Fraunces({
+const cormorant = Cormorant_Garamond({
   variable: "--font-heading",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const manrope = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -148,7 +152,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${dmSans.variable} font-body scroll-smooth`}
+      className={`${cormorant.variable} ${manrope.variable} font-body scroll-smooth`}
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -162,6 +166,7 @@ export default function RootLayout({
         <main className="flex-1 w-full">{children}</main>
         <Footer />
         <FloatingWhatsApp />
+        <MobileBookingBar />
         <CookieNotice />
         <GoogleAnalytics />
       </body>

@@ -3,6 +3,7 @@ import { TrustStrip } from "@/components/TrustStrip";
 import { IntroSection } from "@/components/IntroSection";
 import { RoomsSection } from "@/components/RoomsSection";
 import { LocationTimeline } from "@/components/LocationTimeline";
+import { EmotionalCTA } from "@/components/EmotionalCTA";
 import { ADayWithUs } from "@/components/ADayWithUs";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { FaqSection } from "@/components/FaqSection";
@@ -16,6 +17,7 @@ export default function HomePage() {
       <IntroSection />
       <RoomsSection />
       <LocationTimeline />
+      <EmotionalCTA />
       <ADayWithUs />
       <ReviewsSection />
       <FaqSection />

@@ -27,7 +27,6 @@ export function AvailabilityBar({
   const guestsId = useId();
   const roomTypeId = useId();
 
-  // Helper to format date YYYY-MM-DD
   const today = new Date().toISOString().split('T')[0];
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
 
@@ -45,7 +44,7 @@ export function AvailabilityBar({
     const dIn = new Date(inDate);
     const dOut = new Date(outDate);
     if (dOut <= dIn) {
-      setErrorMessage('Check-out date must be at least one day after check-in.');
+      setErrorMessage('Check-out must be after check-in.');
       return false;
     }
     setErrorMessage('');
@@ -53,63 +52,49 @@ export function AvailabilityBar({
   };
 
   const handleCheckInChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newIn = e.target.value;
-    setCheckIn(newIn);
-    validateDates(newIn, checkOut);
+    const v = e.target.value;
+    setCheckIn(v);
+    validateDates(v, checkOut);
   };
 
   const handleCheckOutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newOut = e.target.value;
-    setCheckOut(newOut);
-    validateDates(checkIn, newOut);
+    const v = e.target.value;
+    setCheckOut(v);
+    validateDates(checkIn, v);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateDates(checkIn, checkOut)) {
-      return;
-    }
+    if (!validateDates(checkIn, checkOut)) return;
 
-    const bookingPayload: BookingData = {
-      checkIn,
-      checkOut,
-      guests,
-      roomType
-    };
+    const payload: BookingData = { checkIn, checkOut, guests, roomType };
 
-    // If an external booking engine or payment gateway callback is registered
     if (onBookingEngineSubmit) {
-      onBookingEngineSubmit(bookingPayload);
+      onBookingEngineSubmit(payload);
       return;
     }
 
-    // Default: seamless instant WhatsApp reservation flow
-    const waUrl = buildWhatsAppLink({
-      checkIn,
-      checkOut,
-      guests,
-      roomType
-    });
-
+    const waUrl = buildWhatsAppLink({ checkIn, checkOut, guests, roomType });
     window.open(waUrl, '_blank', 'noopener,noreferrer');
   };
 
+  const fieldClasses = "flex flex-col gap-1.5 p-3 rounded-xl bg-white/8 border border-white/10 hover:border-white/20 transition-colors";
+  const labelClasses = "text-[10px] font-bold uppercase tracking-[0.15em] text-white/40 flex items-center gap-1.5";
+  const inputClasses = "w-full bg-transparent text-sm font-medium text-white focus:outline-none cursor-pointer placeholder:text-white/30";
+
   return (
-    <div className={`w-full max-w-5xl mx-auto ${className}`}>
+    <div className={`w-full ${className}`}>
       <form
         onSubmit={handleSubmit}
-        className="bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-3xl p-4 sm:p-6 lg:p-7 shadow-2xl border border-[var(--border-subtle)] relative backdrop-blur-md"
-        aria-label="Check room availability form"
+        className="bg-[var(--ocean-deep)]/95 backdrop-blur-xl rounded-3xl p-5 sm:p-6 shadow-2xl border border-white/10 relative"
+        aria-label="Check room availability"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
-          {/* Check-in Date */}
-          <div className="flex flex-col space-y-1.5 p-3 rounded-2xl bg-[var(--bg-base)] border border-[var(--border-subtle)]">
-            <label
-              htmlFor={checkInId}
-              className="text-xs font-semibold uppercase tracking-wider text-[var(--charcoal-muted)] flex items-center gap-1.5"
-            >
-              <Calendar className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
-              Check-In (12 PM)
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
+          {/* Check-in */}
+          <div className={fieldClasses}>
+            <label htmlFor={checkInId} className={labelClasses}>
+              <Calendar className="w-3 h-3 text-[var(--sunset-gold)]" />
+              Check-In
             </label>
             <input
               id={checkInId}
@@ -118,18 +103,15 @@ export function AvailabilityBar({
               value={checkIn}
               onChange={handleCheckInChange}
               required
-              className="w-full bg-transparent font-medium text-sm text-[var(--text-primary)] focus:outline-none cursor-pointer"
+              className={inputClasses}
             />
           </div>
 
-          {/* Check-out Date */}
-          <div className="flex flex-col space-y-1.5 p-3 rounded-2xl bg-[var(--bg-base)] border border-[var(--border-subtle)]">
-            <label
-              htmlFor={checkOutId}
-              className="text-xs font-semibold uppercase tracking-wider text-[var(--charcoal-muted)] flex items-center gap-1.5"
-            >
-              <Calendar className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
-              Check-Out (11:30 AM)
+          {/* Check-out */}
+          <div className={fieldClasses}>
+            <label htmlFor={checkOutId} className={labelClasses}>
+              <Calendar className="w-3 h-3 text-[var(--sunset-gold)]" />
+              Check-Out
             </label>
             <input
               id={checkOutId}
@@ -138,81 +120,74 @@ export function AvailabilityBar({
               value={checkOut}
               onChange={handleCheckOutChange}
               required
-              className="w-full bg-transparent font-medium text-sm text-[var(--text-primary)] focus:outline-none cursor-pointer"
+              className={inputClasses}
             />
           </div>
 
           {/* Room Type */}
-          <div className="flex flex-col space-y-1.5 p-3 rounded-2xl bg-[var(--bg-base)] border border-[var(--border-subtle)]">
-            <label
-              htmlFor={roomTypeId}
-              className="text-xs font-semibold uppercase tracking-wider text-[var(--charcoal-muted)] flex items-center gap-1.5"
-            >
-              <BedDouble className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
-              Room Type
+          <div className={fieldClasses}>
+            <label htmlFor={roomTypeId} className={labelClasses}>
+              <BedDouble className="w-3 h-3 text-[var(--sunset-gold)]" />
+              Room
             </label>
             <select
               id={roomTypeId}
               value={roomType}
               onChange={(e) => setRoomType(e.target.value)}
-              className="w-full bg-transparent font-medium text-sm text-[var(--text-primary)] focus:outline-none cursor-pointer"
+              className={`${inputClasses} [&>option]:text-gray-900 [&>option]:bg-white`}
             >
               {GUEST_HOUSE_DATA.rooms.map((room) => (
-                <option key={room.id} value={room.name} className="text-gray-900 bg-white">
-                  {room.name} (from ₹{room.basePrice})
+                <option key={room.id} value={room.name}>
+                  {room.name} (₹{room.basePrice})
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Guests Count & Submit */}
-          <div className="flex flex-col space-y-1.5 p-3 rounded-2xl bg-[var(--bg-base)] border border-[var(--border-subtle)]">
-            <label
-              htmlFor={guestsId}
-              className="text-xs font-semibold uppercase tracking-wider text-[var(--charcoal-muted)] flex items-center gap-1.5"
-            >
-              <Users className="w-3.5 h-3.5 text-[var(--accent-primary)]" />
+          {/* Guests */}
+          <div className={fieldClasses}>
+            <label htmlFor={guestsId} className={labelClasses}>
+              <Users className="w-3 h-3 text-[var(--sunset-gold)]" />
               Guests
             </label>
             <select
               id={guestsId}
               value={guests}
               onChange={(e) => setGuests(e.target.value)}
-              className="w-full bg-transparent font-medium text-sm text-[var(--text-primary)] focus:outline-none cursor-pointer"
+              className={`${inputClasses} [&>option]:text-gray-900 [&>option]:bg-white`}
             >
               <option value="1 Guest (Solo)">1 Guest (Solo)</option>
               <option value="2 Guests (Couple)">2 Guests (Couple)</option>
-              <option value="3 Guests (Family/Group)">3 Guests (Family/Group)</option>
-              <option value="4 Guests (Family/Group)">4 Guests (Family Suite)</option>
+              <option value="3 Guests (Family/Group)">3 Guests (Family)</option>
+              <option value="4 Guests (Family/Group)">4 Guests (Suite)</option>
             </select>
           </div>
+
+          {/* Submit */}
+          <button
+            type="submit"
+            className="btn-gold flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold tracking-wide w-full"
+          >
+            <span>Check Availability</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
-        {/* Validation error display */}
+        {/* Error */}
         {errorMessage && (
           <div
             role="alert"
-            className="mt-3 flex items-center gap-2 text-xs font-medium text-red-600 bg-red-50 dark:bg-red-950/40 p-2.5 rounded-xl border border-red-200 dark:border-red-900"
+            className="mt-3 flex items-center gap-2 text-xs font-medium text-red-300 bg-red-500/10 border border-red-500/20 p-2.5 rounded-xl"
           >
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{errorMessage}</span>
           </div>
         )}
 
-        {/* Submit action */}
-        <div className="mt-4 pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[var(--border-subtle)] text-xs text-[var(--text-secondary)]">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Direct WhatsApp confirmation • Best tariff guaranteed • Zero booking fees</span>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl font-semibold text-white bg-[var(--roza-purple)] hover:bg-[var(--french-teal)] transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--roza-purple)]"
-          >
-            <span>Check Availability</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+        {/* Bottom info */}
+        <div className="mt-4 pt-3 flex items-center justify-center gap-2 text-[10px] text-white/30 border-t border-white/8">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>Direct WhatsApp confirmation · Best tariff · Zero booking fees</span>
         </div>
       </form>
     </div>

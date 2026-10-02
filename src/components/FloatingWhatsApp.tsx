@@ -1,56 +1,76 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { GUEST_HOUSE_DATA, buildWhatsAppLink } from '@/data/guestHouseData';
 
 export function FloatingWhatsApp() {
-  const [showTooltip, setShowTooltip] = useState(true);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const directWhatsAppUrl = buildWhatsAppLink({
-    customMessage: "Hello PR Roza Grand, I'd like to check room availability and tariffs."
+  useEffect(() => {
+    // Show after scrolling past the hero
+    const handleScroll = () => setIsVisible(window.scrollY > 500);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // Show tooltip after 4 seconds, auto-hide after 6 more
+    const tooltipTimer = setTimeout(() => {
+      setShowTooltip(true);
+      setTimeout(() => setShowTooltip(false), 6000);
+    }, 4000);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(tooltipTimer);
+    };
+  }, []);
+
+  const waUrl = buildWhatsAppLink({
+    customMessage: "Hello PR Roza Grand! I'd like to know about room availability."
   });
 
   return (
-    <aside
-      aria-label="Instant WhatsApp Booking Support"
-      className="fixed bottom-6 right-6 z-50 flex items-end flex-col gap-2"
+    <div
+      className={`fixed bottom-6 right-6 z-50 transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+      // Hide on mobile when MobileBookingBar is visible
+      style={{ bottom: 'max(1.5rem, calc(env(safe-area-inset-bottom) + 1.5rem))' }}
     >
-      {/* Tooltip message bubble */}
+      {/* Tooltip */}
       {showTooltip && (
-        <div
-          role="status"
-          className="relative bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border-subtle)] shadow-xl rounded-2xl p-3 pr-8 max-w-xs text-xs sm:text-sm animate-fade-in"
-        >
-          <button
-            onClick={() => setShowTooltip(false)}
-            className="absolute top-2 right-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] p-0.5 rounded focus:outline-none"
-            aria-label="Dismiss WhatsApp prompt"
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
-          <p className="font-semibold text-[var(--accent-primary)] mb-0.5">Need instant booking?</p>
-          <p className="text-[var(--text-secondary)] leading-relaxed">
-            Chat with our Auroville front desk directly on WhatsApp.
-          </p>
+        <div className="absolute bottom-full right-0 mb-3 animate-fade-slide-up">
+          <div className="bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border-subtle)] shadow-xl rounded-2xl px-4 py-3 max-w-[220px] relative">
+            <button
+              onClick={() => setShowTooltip(false)}
+              className="absolute -top-2 -right-2 w-5 h-5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-full flex items-center justify-center"
+              aria-label="Dismiss"
+            >
+              <X className="w-3 h-3 text-[var(--text-muted)]" />
+            </button>
+            <p className="text-xs font-semibold">Need help booking?</p>
+            <p className="text-[10px] text-[var(--text-muted)] mt-0.5">Chat with us on WhatsApp for instant confirmation.</p>
+            {/* Arrow */}
+            <div className="absolute bottom-0 right-6 translate-y-full">
+              <div className="w-3 h-3 bg-[var(--bg-surface)] border-r border-b border-[var(--border-subtle)] rotate-45 -translate-y-1.5" />
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Main Floating Button */}
+      {/* Button */}
       <a
-        href={directWhatsAppUrl}
+        href={waUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat directly on WhatsApp with PR Roza Grand front desk"
-        className="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40"
+        className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600 hover:shadow-emerald-500/40 hover:scale-110 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+        aria-label={`Chat on WhatsApp — ${GUEST_HOUSE_DATA.contact.whatsappDisplay}`}
       >
-        <span className="sr-only">Chat on WhatsApp with PR Roza Grand</span>
-        
-        {/* Pulsing halo ring */}
-        <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-30 group-hover:opacity-50 animate-ping pointer-events-none" />
-
-        <MessageCircle className="w-7 h-7 sm:w-8 sm:h-8 fill-current" />
+        <MessageCircle className="w-6 h-6" />
+        {/* Pulse ring */}
+        <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-20 pointer-events-none" />
       </a>
-    </aside>
+    </div>
   );
 }

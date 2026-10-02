@@ -1,27 +1,40 @@
 import Link from 'next/link';
-import { Phone, MessageCircle, MapPin, Mail, Navigation, Heart } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Mail, Navigation, ArrowUpRight } from 'lucide-react';
 import { LotusLogo } from './LotusLogo';
 import { GUEST_HOUSE_DATA } from '@/data/guestHouseData';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const quickLinks = [
+    { name: 'Home',         href: '/' },
+    { name: 'Rooms & Tariffs', href: '/rooms' },
+    { name: 'Photo Gallery', href: '/gallery' },
+    { name: 'Things to Do', href: '/things-to-do' },
+    { name: 'Guest Policies', href: '/policies' },
+  ];
+
   return (
-    <footer className="bg-[var(--roza-purple)] text-white/90 pt-16 pb-12 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
-          {/* Brand Col */}
-          <div className="lg:col-span-4 space-y-4">
+    <footer className="bg-[#083D46] text-white/80">
+
+      {/* ── Main Footer Content ── */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 sm:pt-20 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
+
+          {/* Brand */}
+          <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="inline-block">
               <LotusLogo variant="light" size="lg" />
             </Link>
-            <p className="text-xs sm:text-sm text-white/75 leading-relaxed pr-4">
-              {GUEST_HOUSE_DATA.tagline}. Located opposite McDonald&apos;s on ECR, Chinna Mudhaliyar Chavadi. Quiet, comfortable, and affordable accommodation for couples, families, and global tourists visiting Auroville.
+            <p className="text-sm text-white/50 leading-relaxed pr-4 max-w-sm">
+              {GUEST_HOUSE_DATA.tagline}. Quiet, comfortable, and affordable accommodation for couples, families, and travellers exploring Auroville and Pondicherry.
             </p>
-            <div className="pt-2 flex items-center gap-3">
+
+            {/* Social / Quick Icons */}
+            <div className="flex items-center gap-3 pt-2">
               <a
                 href={`tel:${GUEST_HOUSE_DATA.contact.phoneRaw}`}
-                className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                className="w-10 h-10 rounded-full bg-white/8 hover:bg-white/15 text-white flex items-center justify-center transition-colors"
                 aria-label="Call front desk"
               >
                 <Phone className="w-4 h-4" />
@@ -30,8 +43,8 @@ export function Footer() {
                 href={`https://wa.me/${GUEST_HOUSE_DATA.contact.whatsapp.replace(/\D/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
-                aria-label="Message on WhatsApp"
+                className="w-10 h-10 rounded-full bg-emerald-600/80 hover:bg-emerald-500 text-white flex items-center justify-center transition-colors"
+                aria-label="WhatsApp"
               >
                 <MessageCircle className="w-4 h-4" />
               </a>
@@ -39,111 +52,103 @@ export function Footer() {
                 href={GUEST_HOUSE_DATA.contact.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                aria-label="Google Maps location"
+                className="w-10 h-10 rounded-full bg-white/8 hover:bg-white/15 text-white flex items-center justify-center transition-colors"
+                aria-label="Google Maps"
               >
                 <Navigation className="w-4 h-4" />
+              </a>
+              <a
+                href={`mailto:${GUEST_HOUSE_DATA.contact.email}`}
+                className="w-10 h-10 rounded-full bg-white/8 hover:bg-white/15 text-white flex items-center justify-center transition-colors"
+                aria-label="Email"
+              >
+                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="font-heading text-sm font-bold tracking-wider uppercase text-amber-300">
-              Quick Links
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--sunset-gold)]">
+              Explore
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-white/75">
-              <li>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/rooms" className="hover:text-white transition-colors">
-                  Rooms & Tariffs
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="hover:text-white transition-colors">
-                  Photo Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/things-to-do" className="hover:text-white transition-colors">
-                  Things To Do
-                </Link>
-              </li>
-              <li>
-                <Link href="/policies" className="hover:text-white transition-colors">
-                  Guest Policies
-                </Link>
-              </li>
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/50 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                  >
+                    <span>{link.name}</span>
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Rooms List */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-heading text-sm font-bold tracking-wider uppercase text-amber-300">
-              Accommodations
+          {/* Accommodations */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--sunset-gold)]">
+              Rooms
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-white/75">
+            <ul className="space-y-2.5">
               {GUEST_HOUSE_DATA.rooms.map((room) => (
                 <li key={room.id}>
                   <Link
                     href={`/rooms/${room.slug}`}
-                    className="hover:text-white transition-colors flex items-center justify-between"
+                    className="text-sm text-white/50 hover:text-white transition-colors flex items-center justify-between group"
                   >
                     <span>{room.name}</span>
-                    <span className="text-amber-300 font-semibold text-xs">
-                      ₹{room.basePrice}
+                    <span className="text-[var(--sunset-gold)] text-xs font-semibold">
+                      ₹{room.basePrice.toLocaleString('en-IN')}
                     </span>
                   </Link>
                 </li>
               ))}
-              <li className="pt-2 text-xs text-white/60">
-                * Tariffs may differ during weekends & holidays.
-              </li>
             </ul>
+            <p className="text-[10px] text-white/30 mt-3">
+              * Tariffs may differ on weekends & holidays
+            </p>
           </div>
 
-          {/* Contact & Location Info */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-heading text-sm font-bold tracking-wider uppercase text-amber-300">
-              Location & Contact
+          {/* Contact & Location */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--sunset-gold)]">
+              Find Us
             </h4>
-            <div className="space-y-2 text-xs sm:text-sm text-white/75">
-              <p className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-amber-300 flex-shrink-0 mt-0.5" />
+            <div className="space-y-3 text-sm text-white/50">
+              <p className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[var(--sunset-gold)] flex-shrink-0 mt-0.5" />
                 <span>{GUEST_HOUSE_DATA.contact.address.fullAddress}</span>
               </p>
-              <p className="flex items-center gap-2 pt-1">
-                <Phone className="w-4 h-4 text-amber-300 flex-shrink-0" />
-                <a
-                  href={`tel:${GUEST_HOUSE_DATA.contact.phoneRaw}`}
-                  className="hover:text-white font-medium"
-                >
+              <p className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-[var(--sunset-gold)] flex-shrink-0" />
+                <a href={`tel:${GUEST_HOUSE_DATA.contact.phoneRaw}`} className="hover:text-white font-medium transition-colors">
                   {GUEST_HOUSE_DATA.contact.phoneDisplay}
                 </a>
               </p>
-              <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-amber-300 flex-shrink-0" />
-                <span className="hover:text-white">
-                  {GUEST_HOUSE_DATA.contact.email}
-                </span>
+              <p className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[var(--sunset-gold)] flex-shrink-0" />
+                <span>{GUEST_HOUSE_DATA.contact.email}</span>
               </p>
             </div>
           </div>
         </div>
 
-        {/* Bottom credits */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
-          <p>© {currentYear} {GUEST_HOUSE_DATA.legalName}. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/policies" className="hover:text-white transition-colors">
-              Terms & Cancellation Policy
+        {/* ── Brand Quote + Credits ── */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/30 gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            <p>© {currentYear} {GUEST_HOUSE_DATA.legalName}. All rights reserved.</p>
+            <span className="hidden sm:inline text-white/15">·</span>
+            <p className="font-heading italic text-white/40">Made for slow mornings and unforgettable sunsets.</p>
+          </div>
+          <div className="flex items-center gap-5">
+            <Link href="/policies" className="hover:text-white/60 transition-colors">
+              Policies
             </Link>
-            <Link href="/#location" className="hover:text-white transition-colors">
-              Directions & Map
+            <Link href="/#location" className="hover:text-white/60 transition-colors">
+              Directions
             </Link>
           </div>
         </div>

@@ -1,58 +1,78 @@
-import { Star, Wifi, MapPin, ShieldCheck, Clock } from 'lucide-react';
-import { GUEST_HOUSE_DATA } from '@/data/guestHouseData';
+import { Star, Wifi, MapPin, Clock, Bike, ShieldCheck } from 'lucide-react';
 
 export function TrustStrip() {
-  const trustPoints = [
+  const metrics = [
     {
       icon: Star,
-      title: "4.8 / 5.0 Google Rating",
-      subtitle: "Verified couple & family stays",
-      color: "text-amber-500",
-    },
-    {
-      icon: Wifi,
-      title: "High-Speed Wi-Fi & Tea",
-      subtitle: "Included with every room",
-      color: "text-[var(--accent-primary)]",
+      value: '4.8',
+      label: 'Google Rating',
+      sub: '120+ verified stays',
+      color: 'text-[#C99A4A]',
+      bg: 'bg-[#EAF3F1] border border-[#B8D8D4]',
     },
     {
       icon: MapPin,
-      title: "Opposite McDonald's ECR",
-      subtitle: "3 mins to Auroville Beach",
-      color: "text-emerald-600 dark:text-emerald-400",
+      value: '1.2 km',
+      label: 'to Auroville Beach',
+      sub: '3 mins by vehicle',
+      color: 'text-[#0B5961]',
+      bg: 'bg-[#EAF3F1] border border-[#B8D8D4]',
+    },
+    {
+      icon: Wifi,
+      value: '24/7',
+      label: 'High-Speed Wi-Fi',
+      sub: 'Included in every room',
+      color: 'text-[#0B5961]',
+      bg: 'bg-[#EAF3F1] border border-[#B8D8D4]',
     },
     {
       icon: Clock,
-      title: "24-Hour Front Desk",
-      subtitle: "Safe parking & rental bikes",
-      color: "text-[var(--roza-purple-light)] dark:text-[var(--roza-purple)]",
+      value: '24 hr',
+      label: 'Front Desk',
+      sub: 'Always here for you',
+      color: 'text-[#0B5961]',
+      bg: 'bg-[#EAF3F1] border border-[#B8D8D4]',
+    },
+    {
+      icon: Bike,
+      value: 'Free',
+      label: 'Bike Rental Help',
+      sub: 'Scooters from front desk',
+      color: 'text-[#0B5961]',
+      bg: 'bg-[#EAF3F1] border border-[#B8D8D4]',
+    },
+    {
+      icon: ShieldCheck,
+      value: '₹0',
+      label: 'Booking Fees',
+      sub: 'Direct WhatsApp booking',
+      color: 'text-[#0B5961]',
+      bg: 'bg-[#EAF3F1] border border-[#B8D8D4]',
     },
   ];
 
   return (
     <section
-      aria-label="Guest House Highlights & Accreditations"
-      className="border-y border-[var(--border-subtle)] bg-[var(--bg-surface)] py-6 sm:py-8"
+      aria-label="PR Roza Grand — Key Guest Highlights"
+      className="bg-[var(--bg-surface)] border-y border-[var(--border-subtle)]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          {trustPoints.map((item, index) => {
-            const Icon = item.icon;
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-8 sm:py-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8">
+          {metrics.map((m, i) => {
+            const Icon = m.icon;
             return (
               <div
-                key={index}
-                className="flex items-start gap-3.5 group"
+                key={i}
+                className="flex flex-col items-center text-center gap-2.5 group"
               >
-                <div className={`p-2.5 rounded-2xl bg-[var(--bg-base)] border border-[var(--border-subtle)] ${item.color} flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                <div className={`w-11 h-11 rounded-2xl ${m.bg} ${m.color} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-[var(--text-primary)] leading-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs text-[var(--text-secondary)] mt-0.5">
-                    {item.subtitle}
-                  </p>
+                  <div className={`font-heading text-xl font-bold ${m.color}`}>{m.value}</div>
+                  <div className="text-xs font-semibold text-[var(--text-primary)] leading-tight">{m.label}</div>
+                  <div className="text-[10px] text-[var(--text-muted)] mt-0.5">{m.sub}</div>
                 </div>
               </div>
             );

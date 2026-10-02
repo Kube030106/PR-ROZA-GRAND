@@ -2,63 +2,103 @@
 
 @layer base {
   :root {
-    /* 6 Named Brand & Coastal Architectural Colors */
-    --french-yellow: #D99824;        /* French-colonial warm mustard */
+    /* ── Coastal Brand Palette ─────────────────────────────── */
+    --sand:              #F7F3EA;       /* warm sand background */
+    --sand-dark:         #EDE6D6;       /* slightly deeper sand */
+    --ocean-deep:        #0B3D46;       /* deep ocean primary */
+    --ocean-mid:         #16323A;       /* secondary dark */
+    --ocean-muted:       #1B5260;       /* softer ocean */
+    --ocean-soft:        #E5F0F2;       /* very light ocean tint */
+    --sunset-gold:       #D8A95D;       /* sunset gold accent */
+    --sunset-warm:       #C4923B;       /* deeper gold */
+    --sunset-pale:       #FBF0DC;       /* pale gold tint */
+    --coral:             #C4614A;       /* warm coral accent */
+    --white:             #FFFFFF;
+    --charcoal:          #1A2028;       /* near-black text */
+    --slate-mid:         #3D4E5A;       /* secondary text */
+    --slate-light:       #6B7E8C;       /* muted text */
+
+    /* ── French-Colonial Brand (from existing logo) ─────────── */
+    --french-teal:       #1B7982;
+    --french-teal-dark:  #114F55;
+    --french-teal-soft:  #E5F0F2;
+    --roza-purple:       #46144A;
+    --roza-gold:         #C2952B;
+    --roza-gold-light:   #FBF4DE;
+
+    /* ── Coastal Badges & Tokens ────────────────────────────── */
+    --badge-seafoam-bg:  #EAF3F1;       /* soft seafoam badge bg */
+    --badge-seafoam-border: #B8D8D4;    /* subtle seafoam border */
+    --badge-ocean-text:  #0B5961;       /* deep ocean text */
+    --badge-sec-border:  #C9D6D4;       /* secondary badge border */
+    --gold-accent:       #C99A4A;       /* gold accent for icons/dots */
+
+    /* ── Semantic Tokens (Light Mode) ───────────────────────── */
+    --bg-base:           #F7F3EA;
+    --bg-surface:        #FFFFFF;
+    --bg-card:           #FFFFFF;
+    --bg-elevated:       #FDFAF4;
+    --border-subtle:     #E8E1D4;
+    --border-medium:     #D3C9B8;
+    --text-primary:      #1A2028;
+    --text-secondary:    #3D4E5A;
+    --text-muted:        #6B7E8C;
+    --accent-primary:    #0B3D46;
+    --accent-hover:      #16323A;
+    --accent-gold:       #D8A95D;
+    --accent-gold-hover: #C4923B;
+
+    /* Deprecated but kept for backward compat */
+    --french-yellow:     #D99824;
     --french-yellow-light: #FBF1DC;
-    --french-teal: #1B7982;          /* Pondicherry heritage teal shutter / sea */
-    --french-teal-dark: #114F55;
-    --french-teal-soft: #E9F4F5;
-    --roza-purple: #46144A;          /* Royal purple from PR Roza Grand sign */
+    --french-teal-dark:  #114F55;
     --roza-purple-light: #6E2675;
-    --roza-purple-soft: #F6ECF7;
-    --roza-gold: #C2952B;            /* Golden lotus emblem */
-    --roza-gold-light: #FBF4DE;
-    --coastal-cream: #FAF7F2;        /* Sun-bleached limestone background */
-    --coastal-sand: #EEE7DA;
-    --charcoal-slate: #1C242C;       /* Deep slate for high-contrast AAA text */
-    --charcoal-muted: #4F5F6E;       /* Accessible secondary text */
-    
-    /* Semantic tokens */
-    --bg-base: #FAF7F2;
-    --bg-surface: #FFFFFF;
-    --bg-card: #FFFFFF;
-    --border-subtle: #E8E1D4;
-    --border-medium: #D3C9B8;
-    --text-primary: #1C242C;
-    --text-secondary: #4F5F6E;
-    --accent-primary: #1B7982;
-    --accent-hover: #114F55;
-    --brand-royal: #46144A;
+    --roza-purple-soft:  #F6ECF7;
+    --coastal-cream:     #F7F3EA;
+    --coastal-sand:      #EDE6D6;
+    --charcoal-slate:    #1A2028;
+    --charcoal-muted:    #6B7E8C;
   }
 
   [data-theme="dark"],
   .dark {
-    --french-yellow: #EEB852;
-    --french-yellow-light: #38270F;
-    --french-teal: #3BB4BE;
-    --french-teal-dark: #1B6F77;
-    --french-teal-soft: #132A2D;
-    --roza-purple: #B258BC;
-    --roza-purple-light: #D283DA;
-    --roza-purple-soft: #2F1432;
-    --roza-gold: #E5BD5D;
-    --roza-gold-light: #34280E;
-    --coastal-cream: #0E1317;
-    --coastal-sand: #171F25;
-    --charcoal-slate: #F4F7F9;
-    --charcoal-muted: #97A7B6;
+    --sand:              #0E1317;
+    --sand-dark:         #161D22;
+    --ocean-deep:        #3BB4BE;
+    --ocean-mid:         #58C9D3;
+    --ocean-soft:        #132A2D;
+    --sunset-gold:       #E5BD5D;
+    --sunset-warm:       #D4AA45;
+    --sunset-pale:       #34280E;
 
-    /* Semantic tokens */
-    --bg-base: #0E1317;
-    --bg-surface: #161D22;
-    --bg-card: #1C252C;
-    --border-subtle: #26333D;
-    --border-medium: #3A4C5A;
-    --text-primary: #F4F7F9;
-    --text-secondary: #97A7B6;
-    --accent-primary: #3BB4BE;
-    --accent-hover: #58C9D3;
-    --brand-royal: #B258BC;
+    --bg-base:           #0E1317;
+    --bg-surface:        #161D22;
+    --bg-card:           #1C252C;
+    --bg-elevated:       #1A2229;
+    --border-subtle:     #26333D;
+    --border-medium:     #3A4C5A;
+    --text-primary:      #F4F7F9;
+    --text-secondary:    #97A7B6;
+    --text-muted:        #6B7E8C;
+    --accent-primary:    #3BB4BE;
+    --accent-hover:      #58C9D3;
+    --accent-gold:       #E5BD5D;
+    --accent-gold-hover: #D4AA45;
+
+    --french-yellow:     #EEB852;
+    --french-yellow-light: #38270F;
+    --french-teal:       #3BB4BE;
+    --french-teal-dark:  #1B6F77;
+    --french-teal-soft:  #132A2D;
+    --roza-purple:       #B258BC;
+    --roza-purple-light: #D283DA;
+    --roza-purple-soft:  #2F1432;
+    --roza-gold:         #E5BD5D;
+    --roza-gold-light:   #34280E;
+    --coastal-cream:     #0E1317;
+    --coastal-sand:      #171F25;
+    --charcoal-slate:    #F4F7F9;
+    --charcoal-muted:    #97A7B6;
   }
 
   html {
@@ -69,6 +109,7 @@
   body {
     background-color: var(--bg-base);
     color: var(--text-primary);
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -78,73 +119,356 @@
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
+
+  ::selection {
+    background-color: var(--ocean-deep);
+    color: white;
+  }
 }
 
-/* Custom Typography helpers */
+/* ── Typography ─────────────────────────────────────────── */
 .font-heading {
-  font-family: var(--font-heading), Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-feature-settings: "liga" 1, "kern" 1;
 }
 
 .font-body {
-  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
 }
 
-/* Characterful arched room frame inspired by French colonial arched verandas */
+/* ── Architectural Frame Shapes ─────────────────────────── */
 .coastal-arch {
   border-top-left-radius: 9999px;
   border-top-right-radius: 9999px;
-  border-bottom-left-radius: 1.25rem;
-  border-bottom-right-radius: 1.25rem;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
 }
 
 .coastal-pill {
   border-radius: 9999px;
 }
 
-/* Orchestrated Hero Entrance Motion */
-@keyframes heroEntranceFade {
-  0% {
-    opacity: 0;
-    transform: translateY(22px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ── Coastal Badges ─────────────────────────────────────── */
+.badge-coastal-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background-color: var(--badge-seafoam-bg, #EAF3F1);
+  color: var(--badge-ocean-text, #0B5961);
+  border: 1px solid var(--badge-seafoam-border, #B8D8D4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.badge-coastal-primary:hover {
+  background-color: #E2EFEF;
+  border-color: #0B5961;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(11, 89, 97, 0.08);
+}
+
+.badge-coastal-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--badge-ocean-text, #0B5961);
+  border: 1px solid var(--badge-sec-border, #C9D6D4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.badge-coastal-secondary:hover {
+  background-color: rgba(234, 243, 241, 0.5);
+  border-color: var(--badge-seafoam-border, #B8D8D4);
+  transform: translateY(-1px);
+}
+
+.badge-accent-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: var(--gold-accent, #C99A4A);
+  flex-shrink: 0;
+}
+
+/* ── Wave Divider ───────────────────────────────────────── */
+.wave-top {
+  position: relative;
+}
+.wave-top::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: var(--bg-base);
+  clip-path: ellipse(55% 100% at 50% 0%);
+}
+
+/* ── Hero Entrance Animations ───────────────────────────── */
+@keyframes heroFadeUp {
+  0%   { opacity: 0; transform: translateY(28px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes heroImageScale {
+  0%   { transform: scale(1.08); }
+  100% { transform: scale(1.0); }
+}
+
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%       { transform: translateY(6px); opacity: 0.6; }
+}
+
+@keyframes fadeSlideUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes countUp {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes waveGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(216, 169, 93, 0); }
+  50%       { box-shadow: 0 0 24px 4px rgba(216, 169, 93, 0.25); }
+}
+
+.animate-hero-image {
+  animation: heroImageScale 8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-hero-entrance {
-  animation: heroEntranceFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.animate-hero-label {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.animate-hero-title {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.animate-hero-subtitle {
+  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.animate-hero-cta {
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
 }
 
 .animate-hero-bar {
-  animation: heroEntranceFade 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-  opacity: 0;
+  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
 }
 
-/* Subtle, dignified hover transitions */
+.animate-hero-scroll {
+  animation: scrollBounce 2s ease-in-out 1.5s infinite;
+}
+
+.animate-float {
+  animation: subtleFloat 4s ease-in-out infinite;
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-count {
+  animation: countUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Staggered children fade */
+.stagger-children > * {
+  animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.0s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.4s; }
+
+/* ── Hover Interactions ─────────────────────────────────── */
 .hover-lift {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .hover-lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(11, 61, 70, 0.12);
 }
 
-/* Respect user's motion preferences */
+.hover-scale {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* ── Gold Shimmer Button ────────────────────────────────── */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--sunset-gold) 0%, var(--sunset-warm) 100%);
+  color: var(--ocean-deep);
+  font-weight: 700;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-gold:hover::before {
+  opacity: 1;
+  animation: shimmer 0.8s ease;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(216, 169, 93, 0.45);
+}
+
+/* ── Ocean Dark Button ──────────────────────────────────── */
+.btn-ocean {
+  background: var(--ocean-deep);
+  color: white;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+.btn-ocean:hover {
+  background: var(--ocean-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(11, 61, 70, 0.35);
+}
+
+/* ── Ghost Button ───────────────────────────────────────── */
+.btn-ghost {
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Section label ──────────────────────────────────────── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+.section-label::before,
+.section-label::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent-gold);
+  opacity: 0.6;
+}
+
+/* ── Decorative Gold Line ───────────────────────────────── */
+.gold-line {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sunset-gold), var(--sunset-warm));
+  border-radius: 9999px;
+}
+
+/* ── Image reveal overlay ───────────────────────────────── */
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom img,
+.img-hover-zoom > div > img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-hover-zoom:hover img,
+.img-hover-zoom:hover > div > img {
+  transform: scale(1.06);
+}
+
+/* ── Ocean Gradient Bg ──────────────────────────────────── */
+.bg-ocean-gradient {
+  background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-mid) 100%);
+}
+
+/* ── Grain texture overlay ──────────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+}
+
+/* ── Scroll-triggered reveal (intersection observer helper) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Focus styles ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Respect reduced motion ─────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Focus styles for keyboard accessibility */
-:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
 }
